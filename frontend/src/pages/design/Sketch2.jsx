@@ -1,5 +1,6 @@
 import React from "react";
 import Sketch from "react-p5";
+const http = require("http");
 
 let dim = 800;
 let num = 16;
@@ -79,3 +80,9 @@ export default (props) => {
 
   return <Sketch setup={setup} draw={draw} mousePressed={mousePressed} />;
 };
+
+<Button
+  onClick={() => {
+    http.post({ url: "/api/upload-design-array", body: JSON.stringify(arr) });
+  }}
+></Button>;
