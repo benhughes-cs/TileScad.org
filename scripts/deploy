@@ -58,4 +58,4 @@ npm i
 npm run build
 
 npm install pm2@latest -g
-pm2 start npm -- start -l server.log
+pm2 start --name server -l server.log npm -- start 
