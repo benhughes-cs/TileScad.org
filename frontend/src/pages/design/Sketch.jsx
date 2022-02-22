@@ -4,6 +4,7 @@ import Sketch from "react-p5";
 let dim = 800;
 let num = 16;
 var arr = new Array(num);
+let button;
 
 export default (props) => {
   const setup = (p5, canvasParentRef) => {
@@ -19,6 +20,10 @@ export default (props) => {
         arr[x][y] = false;
       }
     }
+
+    button = p5.createButton("Submit").parent(canvasParentRef);
+    button.position(800,800);
+    
   };
 
   const draw = (p5) => {
@@ -35,6 +40,8 @@ export default (props) => {
     // NOTE: Do not use setState in the draw function or in functions that are executed
     // in the draw function...
     // please use normal variables or class properties for these purposes
+
+
   };
 
   return <Sketch setup={setup} draw={draw} />;
@@ -46,6 +53,7 @@ function create2DArray(rows) {
   for (var i = 0; i < rows; i++) {
     arr[i] = new Array(rows);
   }
+
 
   return arr;
 }
