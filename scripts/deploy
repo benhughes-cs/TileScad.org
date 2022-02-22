@@ -1,0 +1,61 @@
+# manual steps
+ssh-keygen -t rsa -b 4096
+
+# add ssh key to github
+git clone git@github.com:Capstone-Team-4-UARK-2022/TileScad.org.git
+
+
+# install nvm / node
+
+sudo apt install -y curl
+sudo apt install -y build-essential
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+nvm install node 
+
+# install nginx
+sudo apt update
+sudo apt install nginx
+
+
+
+#
+# manually
+#
+
+# follow this for https https://www.techrepublic.com/article/how-to-enable-ssl-on-nginx/
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    include snippets/self-signed.conf;
+    include snippets/ssl-params.conf;
+
+    server_name tilescad.org;
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name tilescad.org;
+
+    return 302 https://$server_name$request_uri;
+}
+
+
+
+
+systemctl restart nginx
+
+
+
+# in directory
+npm i
+npm run build
+
+npm install pm2@latest -g
+pm2 start npm -- start -l server.log
