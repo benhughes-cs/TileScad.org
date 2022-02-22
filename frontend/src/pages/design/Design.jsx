@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import Sketch from "./Sketch";
+import Sketch from "./Sketch2";
 import Navigation from "../BarNav";
 
 function Design() {
